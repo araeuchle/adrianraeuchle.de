@@ -1,0 +1,26 @@
+ip: 192.168.10.19
+memory: 2048
+cpus: 2
+provider: virtualbox
+authorize: ~/.ssh/id_rsa.pub
+keys:
+    - ~/.ssh/id_rsa
+folders:
+    -
+        map: /home/adrian/projects/adrianraeuchle
+        to: /home/vagrant/code
+sites:
+    -
+        map: adrianraeuchle.test
+        to: /home/vagrant/code/public
+databases:
+    - adrianraeuchle
+features:
+    -
+        mariadb: false
+    -
+        ohmyzsh: false
+    -
+        webdriver: false
+name: adrianraeuchle
+hostname: adrianraeuchle
