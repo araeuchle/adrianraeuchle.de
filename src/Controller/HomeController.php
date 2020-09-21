@@ -6,7 +6,7 @@ use App\Services\GithubApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PublicController extends AbstractController
+class HomeController extends AbstractController
 {
 	/**
 	 * @var GithubApiService
@@ -27,18 +27,10 @@ class PublicController extends AbstractController
      */
     public function index()
     {
-        return $this->render('public/home.html.twig', [
+        return $this->render('home/index.html.twig', [
         	'projectCount' => $this->githubApiService->getProjectCount(),
 			'followersCount' => $this->githubApiService->getFollowersCount(),
 			'daysCount' => $this->githubApiService->getDaysCount()
 		]);
     }
-
-	/**
-	 * @Route("/cv", name="cv")
-	 */
-    public function cv()
-	{
-		return $this->render('public/cv.html.twig');
-	}
 }
