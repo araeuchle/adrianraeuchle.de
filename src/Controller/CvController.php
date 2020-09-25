@@ -5,7 +5,10 @@ namespace App\Controller;
 use App\Entity\Skill;
 use App\Services\JobService;
 use App\Services\SkillService;
+use Knp\Snappy\Pdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CvController extends AbstractController
@@ -25,6 +28,7 @@ class CvController extends AbstractController
 		$this->jobService = $jobService;
 		$this->skillService = $skillService;
 	}
+
     /**
      * @Route("/cv", name="cv")
      */
@@ -35,4 +39,21 @@ class CvController extends AbstractController
 			'skills' => $this->skillService->getSkills()
 		]);
     }
+
+	/**
+	 * @Route("/cv/pdf", name="cv.pdf")
+	 */
+    public function generatePdf(Pdf $pdf, KernelInterface  $kernel)
+	{
+		$html = $this->renderView('cv/pdf.html.twig');
+
+		return new Response(
+			$pdf->getOutputFromHtml($html),
+			200,
+			[
+				'Content-Type' => 'application/pdf',
+				'Content-Disposition' => 'attachment; filename=adrianraeuchle.pdf'
+			]
+		);
+	}
 }

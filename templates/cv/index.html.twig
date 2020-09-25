@@ -4,30 +4,21 @@
     <main class=" h-auto mb-auto">
         <section class="relative py-16 bg-gray-300 ">
             <div class="container mx-auto px-4">
-                <div class="flex">
-                    <div class="w-1/2">
-                        <h3 class="mt-6 mb-4 text-xl">CV</h3>
-                    </div>
-                    <div class="w-1/2 text-right pt-5">
-                        <a href="" class="bg-blue-700 hover:bg-blue-500 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1">
-                            Download CV
-                        </a>
-                    </div>
-                </div>
-                {% for job in jobs %}
-                    {% if loop.index % 2 == 1 %}
-                    <div class="flex">
-                    {% endif %}
-                    <div class="w-1/2 bg-white rounded mt-4 mr-4 p-4 shadow text-left border-blue-500 border">
+                <h3 class="text-2xl mt-4">Lebenslauf</h3><br />
+
+                <ul>
+                    {% for job in jobs %}
+                    <div class="mb-5 pl-3 {% if loop.first %} border-l-2 border-blue-500 {% endif %}">
                         <strong>{{ job.title }}  @ {{ job.company }}</strong><br />
                         {{ job.startDate.format('d.m.Y') }} - {% if job.endDate is null %} heute {% else %}{{ job.endDate.format('d.m.Y') }} {% endif %}<br />
-                        <br />
                         {{ job.description | nl2br }}
                     </div>
-                    {% if loop.index % 2 ==  0%}
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                    {% endfor %}
+                </ul>
+
+
+
+
 
                 <h3 class="mt-6 mb-4 text-xl">Skills</h3>
 

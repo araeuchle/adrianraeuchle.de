@@ -12,15 +12,3 @@
 # Uncomment these lines to roll back to
 # v11.x or v10.x
 
-# Remove Node.js v12.x:
-#sudo apt-get -y purge nodejs
-#sudo rm -rf /usr/lib/node_modules/npm/lib
-#sudo rm -rf //etc/apt/sources.list.d/nodesource.list
-
-# Install Node.js v11.x
-#curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
-#sudo apt-get install -y nodejs
-
-# Install Node.js v10.x
-#curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-#sudo apt-get install -y nodejs
