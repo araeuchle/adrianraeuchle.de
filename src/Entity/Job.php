@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\JobRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=JobRepository::class)
@@ -19,11 +21,13 @@ class Job
 
     /**
      * @ORM\Column(type="string", length=255)
+	 * @Assert\NotBlank(message="Bitte geben Sie den Titel ein.")
      */
     private $title;
 
     /**
      * @ORM\Column(type="date")
+	 * @Assert\NotBlank(message="Bitte geben Sie ein Startdatum ein.")
      */
     private $startDate;
 
@@ -34,16 +38,19 @@ class Job
 
     /**
      * @ORM\Column(type="text")
+	 * @Assert\NotBlank(message="Bitte geben Sie eine Beschreibung ein.")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+	 * @Assert\NotBlank(message="Bitte geben Sie eine Firma ein.")
      */
     private $company;
 
     /**
      * @ORM\Column(type="integer")
+	 * @Assert\NotBlank(message="Bitte geben Sie eine Sortierung ein.")
      */
     private $sorting;
 
@@ -57,7 +64,7 @@ class Job
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(string $title = null): self
     {
         $this->title = $title;
 
@@ -69,7 +76,7 @@ class Job
         return $this->startDate;
     }
 
-    public function setStartDate(\DateTimeInterface $startDate): self
+    public function setStartDate(\DateTimeInterface $startDate = null): self
     {
         $this->startDate = $startDate;
 
@@ -81,7 +88,7 @@ class Job
         return $this->endDate;
     }
 
-    public function setEndDate(?\DateTimeInterface $endDate): self
+    public function setEndDate(?\DateTimeInterface $endDate = null): self
     {
         $this->endDate = $endDate;
 
@@ -93,7 +100,7 @@ class Job
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(string $description = null): self
     {
         $this->description = $description;
 
@@ -105,7 +112,7 @@ class Job
         return $this->company;
     }
 
-    public function setCompany(string $company): self
+    public function setCompany(string $company = null): self
     {
         $this->company = $company;
 
@@ -117,7 +124,7 @@ class Job
         return $this->sorting;
     }
 
-    public function setSorting(int $sorting): self
+    public function setSorting(int $sorting = null): self
     {
         $this->sorting = $sorting;
 

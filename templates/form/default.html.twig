@@ -1,5 +1,10 @@
 {% use "form_div_layout.html.twig" %}
 
+{%- block form_start -%}
+    {% set attr = attr|merge({novalidate: 'novalidate'}) %}
+    {{- parent() -}}
+{%- endblock form_start -%}
+
 {% block text_widget %}
     {%- set type = type|default('text') -%}
     {{ block('form_widget_simple') }}
@@ -56,7 +61,7 @@
             <div class="w-full">
                 <ul class="list-reset">
                     {%- for error in errors -%}
-                        <li class="text-red text-xs italic">{{ error.message }}</li>
+                        <li class="text-red-900 text-xs italic ">{{ error.message }}</li>
                     {%- endfor -%}
                 </ul>
             </div>
