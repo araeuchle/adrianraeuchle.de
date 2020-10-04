@@ -123,4 +123,44 @@ class Job
 
         return $this;
     }
+
+    public function getDifference()
+	{
+		$endDate = $this->endDate;
+
+		if ($this->endDate === null) {
+			$endDate = new \DateTime();
+		}
+
+		$diff = $this->startDate->diff($endDate);
+		$months = $diff->m + 1;
+		$years = $diff->y;
+
+		if ($years === 0) {
+			$years = null;
+		}
+
+		if ($months === 12) {
+			$years += 1;
+			$months = null;
+		}
+
+		if ($years === 1) {
+			$yearString = 'Jahr';
+		} else if ($years > 1) {
+			$yearString = 'Jahre';
+		} else {
+			$yearString =  '';
+		}
+
+		if ($months === 1) {
+			$monthString = 'Monat';
+		} elseif($months  > 1) {
+			$monthString = 'Monate';
+		} else {
+			$monthString = '';
+		}
+
+		return trim($years . ' '. $yearString . ' ' . $months  . ' '. $monthString);
+	}
 }

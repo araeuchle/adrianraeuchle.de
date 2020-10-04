@@ -3,7 +3,9 @@
 namespace App\DataFixtures;
 
 use App\Entity\Job;
+use App\Entity\Project;
 use App\Entity\Skill;
+use Cocur\Slugify\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -38,6 +40,11 @@ class AppFixtures extends Fixture
 	 * @var array
 	 */
 	private $jobs  = [];
+
+	/**
+	 * @var array
+	 */
+	private $projects = [];
 
 	public function __construct()
 	{
@@ -99,6 +106,94 @@ class AppFixtures extends Fixture
 				'description' => 'Entwicklung von verschiedensten Projekten auf Basis von Zend Framework und C# für die Veranstaltungsbranche.'
 			],
 		];
+
+		$slugify = new Slugify();
+		$slugify->activateRuleSet('german');
+
+		$this->projects = [
+			[
+				'name' => 'Stundenplaner',
+				'slug' => $slugify->slugify('Stundenplaner'),
+				'description' => '
+					Das Projekt wurde entwickelt um die Zeiten der Mitarbeiter des Fortservice Peppler zu erfassen. <br />
+					Hier ging es darum eine möglichst einfache Übersicht zu gestalten, die aber dennoch ansprechend aussieht. 
+					Von der Funktionalität her bietet das Projekt eine Zeiterfassung, Urlaubstag Erfassung, Krankheitstag Erfassung, sowie einen Monats- und Jahresreporting. <br />
+					<br />
+					Das Projekt wurde auf Basis von Laravel 6 umgesetzt. 
+				',
+				'lessonsLearned' => '
+					Wie man einen Kalender in PHP generiert. <br />
+					Den Unterschied zwischen dem gregorianischen und julianischem Kalender. <br />
+					Wie man Daten für ein Reporting effizient kummuliert. 
+				',
+				'githubLink' => 'https://github.com/araeuchle/stundenplaner-laravel'
+			],
+			[
+				'name' => 'Laravel Make Service (Open Source)',
+				'slug' => $slugify->slugify('Laravel Make Service'),
+				'description' => '
+					Ein kleines Package, welches ich für die Laravel Community geschrieben habe. <br />
+					Funktionalität lager ich gerne in einem Service aus, anstelle diese direkt in einem Controller zu schreiben.
+					Da es noch kein Paket gab, welches mir die Möglichkeit geboten hat Services über das Artisan Command Line Tool zu generieren, habe ich hierraus ein eigenes Paket gebaut. 
+				',
+				'lessonsLearned' => '
+					Wie man Open Source Projekte für Laravel baut. <br />
+					Wie man das Artisan Command Line Tool erweitert.
+				',
+				'githubLink' => 'https://github.com/araeuchle/laravel-make-service'
+			],
+			[
+				'name' => 'Laravel SEO Redirect Map (Open Source)',
+				'slug' => $slugify->slugify('Laravel SEO Redirect Map'),
+				'description' => '
+					Nach dem ich mit dem Service Maker ein erstes Paket programmiert habe, wollte ich unbedingt noch ein weiteres entwickeln. <br />
+					In einem anderen Projekt hatten wir die Problematik, dass wir Seiten hatten, wo sich teilweise der Link geändert hat, wenn man den Namen der Seite geändert hat. 
+					Dies hat dazu geführt, dass wir schlagartig unser SEO Ranking verloren haben, welches wir die ganze Zeit für die Seite gesammelt haben. <br />
+					Um dies zu verhindern habe ich ein kleines Paket gebaut, welches auf diese Änderungen reagiert und einen Eintrag in eine Seo Mapping Tabelle erstellt. 
+					Über eine Middleware wird dann geprüft, ob sich die URL geändert hat und ob ein Eintrag in der Mapping Tabelle vorhanden ist. Ist dies der Fall, so wird ein 301 oder ein 307 
+					Redirect auf die neue URL gesendet. Somit konnten wir sicherstellen, das unsere Rankings nicht mehr verloren gehen. 
+				',
+				'lessonsLearned' => '
+					Vertiefung des Wissens über Open Source Projekte. <br />
+					Unterschiede zwischen einem 301 und einem 307 Redirect. 
+				',
+				'githubLink' => 'https://github.com/araeuchle/laravel-seo-redirect-map'
+			],
+			[
+				'name' => 'JSON Data Viewer',
+				'slug' => $slugify->slugify('JSON Data Viewer'),
+				'description' => '
+					Im Zuge der Affiliate Projekte wurde ein Programm benötigt, mit dem sich schnell und einfach eine große Menge an JSON Daten einsichten und bearbeiten lässt. <br />
+					Die Daten, die wir bekommen, sind leider nicht immer in dem Zustand wie sie benötigen. Dadurch ist die Idee des JSON Data Viewers entstanden.  
+					Im Viewer lässt sich ein JSON Array importieren, der dann daraus automatisiert ein Formular geniert. Dieses Formular enthält dann die Daten des aktuellen Eintrags.
+					Ist ein Eintrag unwichtig, kann er einfach gelöscht werden. Alternativ lässt er sich auch bearbeiten. Ist man mit dem Bearbeiten der Daten fertig, so lassen sie sich 
+					in JSON und CSV Format exportieren. <br />
+					<br />
+					Das Projekt wurde mittels Laravel 8, VueJS, VueEx und Bootstrap umgesetzt. 
+				',
+				'lessonsLearned' => '
+					Bauen einer SPA in VueJs.<br />
+					Umgang mit dem VueEx Store. 
+				',
+				'githubLink' => 'https://github.com/araeuchle/json-data-viewer'
+			],
+			[
+				'name' => 'adrianraeuchle.de',
+				'slug' => $slugify->slugify('adrianraeuchle.de'),
+				'description' => '
+					Jeder braucht eine Website. Gut das stimmt natürlich nicht wirklich, aber sie ist doch ganz praktisch um seine eigenen Skills zu showcasen. <br />
+					Daher habe ich mir die Arbeit und habe meine eigene Website auf Basis von Symfony 5 und TailwindCSS aufgebaut und auf ihr mich selbst, meinen Lebenslauf und meine Projekte vorgestellt.<br />
+					Ebenfalls einen eigenen Blog, der über einen RSS Feed abonniert werden kann, habe ich implementiert. 
+				',
+				'lessonsLearned' => '
+					Vertiefung meines Symfony Wissens. <br /> 
+					Wie man I18N Funktionalität in Symfony einbaut.  <br />
+					Wie man einen Blog in einen RSS-Feed umwandelt <br />
+					Wie man TailwindCSS in Symfony einsetzt. 
+				',
+				'githubLink' => 'https://github.com/araeuchle/adrianraeuchle.de'
+			]
+		];
 	}
 
 	public function load(ObjectManager $manager)
@@ -126,6 +221,18 @@ class AppFixtures extends Fixture
 			$skill->setRating($skillRating);
 			$manager->persist($skill);
 		}
+
+    	foreach ($this->projects as $projectItem) {
+    		$project = new Project();
+    		$project->setName($projectItem['name']);
+    		$project->setSlug($projectItem['slug']);
+    		$project->setDescription($projectItem['description']);
+    		$project->setLessonsLearned($projectItem['lessonsLearned']);
+    		$project->setGithubLink($projectItem['githubLink']);
+
+			$manager->persist($project);
+		}
+
         $manager->flush();
     }
 }

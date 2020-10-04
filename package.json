@@ -17,5 +17,7 @@
         "watch": "encore dev --watch",
         "build": "encore production --progress"
     },
-    "dependencies": {}
+    "dependencies": {
+        "cookie-notice": "^1.3.3"
+    }
 }

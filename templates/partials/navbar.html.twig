@@ -26,7 +26,7 @@
             <ul class="flex flex-col lg:flex-row list-none mr-auto">
                 <li class="flex items-center">
                     <a
-                            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold {% if app.request.get('_route') starts with 'cv' %} underline {% endif %}"
                             href="{{ url('cv') }}"
                     ><i
                                 class="lg:text-gray-300 text-gray-500 far fa-file-alt text-lg leading-lg mr-2"
@@ -36,8 +36,8 @@
                 </li>
                 <li class="flex items-center">
                     <a
-                            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                            href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/profile"
+                            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold {% if app.request.get('_route') starts with 'projects' %} underline {% endif %}"
+                            href="{{ url('projects') }}"
                     ><i
                                 class="lg:text-gray-300 text-gray-500 far fa-file-alt text-lg leading-lg mr-2"
                         ></i>
@@ -46,7 +46,7 @@
                 </li>
                 <li class="flex items-center">
                     <a
-                            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold {% if app.request.get('_route') starts with 'blog' %} underline {% endif %}"
                             href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/profile"
                     ><i
                                 class="lg:text-gray-300 text-gray-500 far fa-file-alt text-lg leading-lg mr-2"
@@ -56,7 +56,7 @@
                 </li>
                 <li class="flex items-center">
                     <a
-                            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold {% if app.request.get('_route') starts with 'imprint' %} underline {% endif %}"
                             href="{{ url('imprint')}}"
                     ><i
                                 class="lg:text-gray-300 text-gray-500 far fa-file-alt text-lg leading-lg mr-2"
@@ -66,12 +66,12 @@
                 </li>
                 <li class="flex items-center">
                     <a
-                            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                            href="{{ url('imprint')}}"
+                            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold {% if app.request.get('_route') starts with 'data_privacy' %} underline {% endif %}"
+                            href="{{ url('data_privacy')}}"
                     ><i
                                 class="lg:text-gray-300 text-gray-500 far fa-file-alt text-lg leading-lg mr-2"
                         ></i>
-                        Datenschutzerklärung</a
+                        Datenschutz</a
                     >
                 </li>
             </ul>
