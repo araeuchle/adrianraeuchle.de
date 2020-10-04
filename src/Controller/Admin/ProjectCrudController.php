@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 
 
@@ -34,7 +35,8 @@ class ProjectCrudController extends AbstractCrudController
 			Field::new('name'),
 			Field::new('slug'),
 			Field::new('description'),
-			Field::new('lessonsLearned')
+			Field::new('lessonsLearned'),
+			ImageField::new('image')
 		];
 	}
 }

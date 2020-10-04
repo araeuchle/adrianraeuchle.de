@@ -229,6 +229,7 @@ class AppFixtures extends Fixture
     		$project->setDescription($projectItem['description']);
     		$project->setLessonsLearned($projectItem['lessonsLearned']);
     		$project->setGithubLink($projectItem['githubLink']);
+    		$project->setUpdatedAt(new \DateTime());
 
 			$manager->persist($project);
 		}

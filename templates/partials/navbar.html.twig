@@ -1,78 +1,41 @@
-<nav
-        class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg {% if app.request.get('_route') != 'home' %} bg-blue-700 {% endif %}"
->
-    <div
-            class="container px-4 mx-auto flex flex-wrap items-center justify-between"
-    >
-        <div
-                class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
-        >
-            <a
-                    class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-no-wrap uppercase text-white"
-                    href="{{ url('home') }}"
-            >Adrian Räuchle</a
-            ><button
-                    class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
-                    type="button"
-                    onclick="toggleNavbar('example-collapse-navbar')"
-            >
-                <i class="text-white fas fa-bars"></i>
+<nav class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg {% if app.request.get('_route') != 'home' %} bg-blue-700 {% endif %}" id="navbar">
+    <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
+        <div class="w-full relative flex justify-between lg:w-auto  px-4 lg:static lg:block lg:justify-start">
+            <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-no-wrap uppercase text-white" href="{{ url('home') }}">
+                Adrian Räuchle
+            </a>
+            <button class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none" type="button" id="mobileToggler">
+                <span class="block relative w-6 h-px rounded-sm bg-white"></span>
+                <span class="block relative w-6 h-px rounded-sm bg-white mt-1"></span>
+                <span class="block relative w-6 h-px rounded-sm bg-white mt-1"></span>
             </button>
         </div>
-        <div
-                class="lg:flex flex-grow items-center bg-white lg:bg-transparent lg:shadow-none hidden"
-                id="example-collapse-navbar"
-        >
-            <ul class="flex flex-col lg:flex-row list-none mr-auto">
-                <li class="flex items-center">
-                    <a
-                            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold {% if app.request.get('_route') starts with 'cv' %} underline {% endif %}"
-                            href="{{ url('cv') }}"
-                    ><i
-                                class="lg:text-gray-300 text-gray-500 far fa-file-alt text-lg leading-lg mr-2"
-                        ></i>
-                        Lebenslauf</a
-                    >
+        <div class="lg:flex flex-grow items-center hidden" id="navbar-menu-container">
+            <ul class="flex flex-col lg:flex-row list-none ml-auto">
+                <li class="nav-item">
+                    <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="{{ url('cv') }}">
+                        Lebenslauf
+                    </a>
                 </li>
-                <li class="flex items-center">
-                    <a
-                            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold {% if app.request.get('_route') starts with 'projects' %} underline {% endif %}"
-                            href="{{ url('projects') }}"
-                    ><i
-                                class="lg:text-gray-300 text-gray-500 far fa-file-alt text-lg leading-lg mr-2"
-                        ></i>
-                        Projekte</a
-                    >
+                <li class="nav-item">
+                    <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="{{ url('projects') }}">
+                        Projekte
+                    </a>
                 </li>
-                <li class="flex items-center">
-                    <a
-                            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold {% if app.request.get('_route') starts with 'blog' %} underline {% endif %}"
-                            href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/profile"
-                    ><i
-                                class="lg:text-gray-300 text-gray-500 far fa-file-alt text-lg leading-lg mr-2"
-                        ></i>
-                        Blog</a
-                    >
+                <li class="nav-item">
+                    <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="#">
+                        Blog
+                    </a>
                 </li>
-                <li class="flex items-center">
-                    <a
-                            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold {% if app.request.get('_route') starts with 'imprint' %} underline {% endif %}"
-                            href="{{ url('imprint')}}"
-                    ><i
-                                class="lg:text-gray-300 text-gray-500 far fa-file-alt text-lg leading-lg mr-2"
-                        ></i>
-                        Impressum</a
-                    >
+                <li class="nav-item">
+                    <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="{{ url('imprint') }}">
+                        Impressum
+                    </a>
                 </li>
-                <li class="flex items-center">
-                    <a
-                            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold {% if app.request.get('_route') starts with 'data_privacy' %} underline {% endif %}"
-                            href="{{ url('data_privacy')}}"
-                    ><i
-                                class="lg:text-gray-300 text-gray-500 far fa-file-alt text-lg leading-lg mr-2"
-                        ></i>
-                        Datenschutz</a
-                    >
+                <li class="nav-item">
+                    <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="{{ url('data_privacy') }}">
+                        Datenschutz
+                    </a>
                 </li>
             </ul>
         </div>

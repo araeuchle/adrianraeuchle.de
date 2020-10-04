@@ -21,9 +21,9 @@
 
                 {% for skill in skills %}
                     {% if loop.index % 2 == 1 %}
-                        <div class="flex">
+                        <div class="lg:flex">
                     {% endif %}
-                    <div class="w-1/2 bg-white rounded mt-4 mr-4 p-4 shadow text-left border-blue-500 border">
+                    <div class="lg:w-1/2 w-full bg-white rounded mt-4 mr-4 p-4 pb-8 lg:pb-4 shadow text-left border-blue-500 border">
                         <strong>{{ skill.name }}</strong><br />
                         <br />
                         {% for i in range(1, skill.rating) %}

@@ -8,9 +8,9 @@
 
             {% for project in projects %}
                 {% if loop.index % 2 == 1 %}
-                    <div class="flex">
+                    <div class="lg:flex">
                 {% endif %}
-                <div class="w-1/2 bg-white rounded mt-4 mr-4 p-4 shadow text-left border-blue-500 border">
+                <div class="lg:w-1/2 w-full bg-white rounded mt-4 mr-4 p-4 shadow text-left border-blue-500 border">
                     <strong>{{ project.name }}</strong><br />
                     <br />
 
@@ -22,7 +22,7 @@
                 {% endif %}
 
                 {% if loop.last % 2 == 1 %}
-            <div class="w-1/2 bg-white rounded mt-4 mr-4 p-4 shadow text-left border-blue-500 border">
+            <div class="lg:w-1/2 w-full bg-white rounded mt-4 mr-4 p-4 shadow text-left border-blue-500 border">
                 Es werden noch weitere Projekte folgen!
             </div>
                 {% endif %}

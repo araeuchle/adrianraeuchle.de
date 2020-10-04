@@ -12,3 +12,4 @@
 // import $ from 'jquery';
 
 import cookie from 'cookie-notice/dist/cookie.notice.min.js';
+import functions from './functions';
