@@ -1,5 +1,8 @@
 let element = document.getElementById('mobileToggler');
-element.addEventListener('click', toggleMenu);
+
+if (element !== null) {
+    element.addEventListener('click', toggleMenu);
+}
 
 function toggleMenu() {
     let nav = document.getElementById('navbar-menu-container');
