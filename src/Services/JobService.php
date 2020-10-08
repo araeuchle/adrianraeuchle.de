@@ -77,7 +77,7 @@ class JobService
 
 		$view =  $this->twig->render('admin_jobs/update.html.twig', [
 			'form' => $form->createView(),
-			'type' => 'add'
+			'type' => $job === null ? 'add' : 'edit'
 		]);
 
 		$response = new Response();

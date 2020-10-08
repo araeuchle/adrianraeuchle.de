@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SkillRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SkillRepository::class)
@@ -19,11 +20,18 @@ class Skill
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Bitte geben Sie einen Projektnamen ein.")
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Bitte geben Sie eine Bewertung der Fähigkeit ein.")
+     * @Assert\Range(
+     *     min=1,
+     *     max=5,
+     *     notInRangeMessage="Bitte geben Sie eine Bewertung zwischen 1 und 5 ein."
+     * )
      */
     private $rating;
 

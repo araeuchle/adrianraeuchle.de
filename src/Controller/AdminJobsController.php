@@ -38,8 +38,6 @@ class AdminJobsController extends AbstractController
     }
 
 	/**
-	 * @param Request $request
-	 * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
 	 * @Route("/admin/jobs/add",  name="admin_jobs_add")
 	 */
     public function add(Request $request)
@@ -48,9 +46,6 @@ class AdminJobsController extends AbstractController
 	}
 
 	/**
-	 * @param Request $request
-	 * @param Job $job
-	 * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
 	 * @ParamConverter("job", class="App\Entity\Job")
 	 * @Route("/admin/jobs/edit/{job}",  name="admin_jobs_edit")
 	 */
