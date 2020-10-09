@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
-class AdminProjectsController extends AbstractController
+class AdminProjectController extends AbstractController
 {
     /**
      * @var ProjectService

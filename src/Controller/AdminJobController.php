@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
-class AdminJobsController extends AbstractController
+class AdminJobController extends AbstractController
 {
 	/**
 	 * @var JobService

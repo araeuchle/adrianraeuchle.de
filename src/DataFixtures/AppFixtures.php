@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Category;
 use App\Entity\Job;
 use App\Entity\Project;
 use App\Entity\Skill;
@@ -45,6 +46,22 @@ class AppFixtures extends Fixture
 	 * @var array
 	 */
 	private $projects = [];
+
+    /**
+     * @var string[]
+     */
+	private $categories = [
+	    'Symfony',
+        'PHP',
+        'Code Quality',
+        'Design Patterns',
+        'Frontend',
+        'VueJs',
+        'CSS',
+        'SCSS',
+        'JavaScript',
+        'DevOps'
+    ];
 
 	public function __construct()
 	{
@@ -232,6 +249,13 @@ class AppFixtures extends Fixture
 
 			$manager->persist($project);
 		}
+
+    	foreach ($this->categories as $categoryItem) {
+    	    $category = new Category();
+    	    $category->setName($categoryItem);
+
+    	    $manager->persist($category);
+        }
 
         $manager->flush();
     }
