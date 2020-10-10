@@ -1,0 +1,49 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Admin - Kategorien!{% endblock %}
+
+{% block body %}
+<main class=" h-auto mb-auto">
+    <section class="relative py-16 bg-gray-300 ">
+        <div class="container mx-auto px-4 bg-white p-4 shadow mt-6">
+            <h3 class="text-2xl mt-4">Kategorien</h3><br />
+
+            <table class="table-auto w-full">
+                <thead>
+                <tr>
+                    <th class="px-4 py-2">Name</th>
+                    <th class="px-4 py-2">Bild</th>
+                    <th class="px-4 py-2">Optionen</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for category in categories %}
+                    <tr>
+                        <td class="border px-4 py-2">
+                            {{ category.name }}
+                        </td>
+                        <td class="border px-4 py-2">
+                            {{ category.image }}
+                        </td>
+                        <td class="border px-4 py-2 text-right">
+                            <a href="{{ url('admin_category_edit', {category: category.id}) }}">Bearbeiten</a> |
+                            <a href="{{ url('admin_category_delete', {category: category.id}) }}">Löschen</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <a href="{{ url('admin_category_add') }}"
+               class="bg-blue-700 hover:bg-blue-500 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 sm:mx-auto mt-4 float-right"
+               type="button"
+               style="transition: all 0.15s ease 0s;"
+            >
+                Neue Kategorie hinzufügen
+            </a>
+
+            <div style="clear:both;"></div>
+        </div>
+    </section>
+</main>
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
@@ -19,8 +20,15 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=255)
+	 * @Assert\NotBlank(message="Bitte geben Sie einen Namen ein.")
      */
     private $name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+	 * @Assert\NotBlank(message="Bitte wählen Sie ein Bild aus.")
+     */
+    private $image;
 
     public function getId(): ?int
     {
@@ -35,6 +43,18 @@ class Category
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

@@ -30,6 +30,23 @@
     <textarea name="{{ full_name }}" id="{{ id }}" cols="30" rows="10" class="{{ block('input_class') }}"  {% if required is defined %}required {% endif %}>{% if value is not empty %}{{ value }}{% endif %}</textarea>
 {%- endblock textarea_widget -%}
 
+{% block choice_widget %}
+    <select name="{{ full_name }}" id="{{ id }}" class="{{ block('choice_class') }}" {% if required is defined %}required {% endif %}>
+        {% for group_label, choice in choices %}
+            {% if choice is iterable %}
+                <optgroup label="{{ group_label|trans({}, translation_domain) }}">
+                    {% set options = choice %}
+                    {{ block('choice_widget_options') }}
+                </optgroup>
+            {% else %}
+                <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %} class="bg-white p-4">
+                    {{ choice.label|trans({}, translation_domain) }}
+                </option>
+            {% endif %}
+        {% endfor %}
+    </select>
+{% endblock %}
+
 {% block form_label -%}
     {%- if label is same as(false) -%}
         <div class="{{ block('form_label_class') }}"></div>
@@ -76,6 +93,10 @@
 {% block input_class -%}
     {% if form.vars.errors|length %}border-red border-1{% endif %} appearance-none bg-grey-lighter border-2 border-grey-lighter rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-blue-light
 {% endblock input_class -%}
+
+{% block choice_class -%}
+    {% if form.vars.errors|length %}border-red border-1{% endif %} appearance-none border-2 border-grey-lighter rounded w-full py-2 px-4 text-grey-darker bg-white focus:outline-none focus:bg-white focus:border-blue-light
+{% endblock choice_class -%}
 
 {% block textarea_class %}
     {% if form.vars.errors|length %}border-red border-1{% endif %} appearance-none bg-grey-lighter border-2 border-grey-lighter rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-blue-light
