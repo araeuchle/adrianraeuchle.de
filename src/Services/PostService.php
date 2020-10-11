@@ -5,6 +5,7 @@ use App\DataProvider\CategoryProvider;
 use App\Entity\Post;
 use App\Form\PostType;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,6 +41,11 @@ class PostService
 	private $twig;
 
 	/**
+	 * @var PaginatorInterface
+	 */
+	private $paginator;
+
+	/**
 	 * PostService constructor.
 	 * @param EntityManagerInterface $entityManager
 	 * @param CategoryProvider $categoryProvider
@@ -52,21 +58,30 @@ class PostService
 		CategoryProvider $categoryProvider,
 		FormFactoryInterface $formFactory,
 		UrlGeneratorInterface $urlGenerator,
-		Environment $twig
+		Environment $twig,
+		PaginatorInterface $paginator
 	) {
 		$this->entityManager = $entityManager;
 		$this->categoryProvider = $categoryProvider;
 		$this->formFactory = $formFactory;
 		$this->urlGenerator = $urlGenerator;
 		$this->twig = $twig;
+		$this->paginator = $paginator;
 	}
 
 
-	public function getPosts()
+	public function getPosts(Request $request)
 	{
-		return $this->entityManager
+		$qb = $this->entityManager
 			->getRepository(Post::class)
-			->findAll();
+			->createQueryBuilder('p');
+
+		return $this->paginator->paginate(
+				$qb,
+				$request->query->getInt('page', 1),
+				1
+			);
+
 	}
 
 	/**

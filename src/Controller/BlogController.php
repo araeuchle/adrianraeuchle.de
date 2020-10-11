@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Services\PostService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -27,10 +28,10 @@ class BlogController extends AbstractController
 	/**
      * @Route("/blog", name="blog")
      */
-    public function index()
+    public function index(Request $request)
     {
         return $this->render('blog/index.html.twig', [
-            'posts' => $this->postService->getPosts(),
+            'posts' => $this->postService->getPosts($request),
         ]);
     }
 

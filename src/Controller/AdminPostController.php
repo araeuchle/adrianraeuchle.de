@@ -28,10 +28,10 @@ class AdminPostController extends AbstractController
 	/**
      * @Route("/admin/post", name="admin_post")
      */
-    public function index()
+    public function index(Request $request)
     {
         return $this->render('admin_post/index.html.twig', [
-            'posts' => $this->postService->getPosts(),
+            'posts' => $this->postService->getPosts($request),
         ]);
     }
 
