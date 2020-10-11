@@ -79,7 +79,7 @@ class PostService
 		return $this->paginator->paginate(
 				$qb,
 				$request->query->getInt('page', 1),
-				1
+				10
 			);
 
 	}
