@@ -1,9 +1,9 @@
 <?php
 namespace App\Services;
 
-use App\DataProvider\CategoryImageProvider;
-use App\Entity\Category;
-use App\Form\CategoryType;
+use App\DataProvider\CategoryProvider;
+use App\Entity\Post;
+use App\Form\PostType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -12,12 +12,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class CategoryService
+class PostService
 {
 	/**
 	 * @var EntityManagerInterface
 	 */
 	private $entityManager;
+
+	/**
+	 * @var CategoryProvider
+	 */
+	private $categoryProvider;
 
 	/**
 	 * @var FormFactoryInterface
@@ -35,75 +40,72 @@ class CategoryService
 	private $twig;
 
 	/**
-	 * @var CategoryImageProvider
-	 */
-	private $categoryImageProvider;
-
-	/**
-	 * CategoryService constructor.
+	 * PostService constructor.
 	 * @param EntityManagerInterface $entityManager
+	 * @param CategoryProvider $categoryProvider
 	 * @param FormFactoryInterface $formFactory
 	 * @param UrlGeneratorInterface $urlGenerator
 	 * @param Environment $twig
-	 * @param CategoryImageProvider $categoryImageProvider
 	 */
 	public function __construct(
 		EntityManagerInterface $entityManager,
+		CategoryProvider $categoryProvider,
 		FormFactoryInterface $formFactory,
 		UrlGeneratorInterface $urlGenerator,
-		Environment $twig,
-		CategoryImageProvider $categoryImageProvider
+		Environment $twig
 	) {
 		$this->entityManager = $entityManager;
+		$this->categoryProvider = $categoryProvider;
 		$this->formFactory = $formFactory;
 		$this->urlGenerator = $urlGenerator;
 		$this->twig = $twig;
-		$this->categoryImageProvider = $categoryImageProvider;
 	}
 
 
-	public function getCategories()
+	public function getPosts()
 	{
 		return $this->entityManager
-			->getRepository(Category::class)
-			->findBy([], ['name' => 'ASC']);
+			->getRepository(Post::class)
+			->findAll();
 	}
 
-	public function getCategoriesWithImages()
+	/**
+	 * @param Post $post
+	 */
+	public function save(Post $post)
 	{
-		return $this->entityManager
-			->getRepository(Category::class)
-			->getCategoriesWithImages();
+		$this->entityManager->persist($post);
+		$this->entityManager->flush();
 	}
 
 	/**
 	 * @param Request $request
-	 * @param Category|null $category
+	 * @param Post|null $post
 	 * @return RedirectResponse|Response
 	 */
-	public function updateAction(Request $request, Category $category = null)
+	public function updateAction(Request $request, Post $post = null)
 	{
-		$images = $this->categoryImageProvider->getImages();
+		$categories = $this->categoryProvider->getCategories();
 
-		$form = $this->formFactory->create(CategoryType::class, $category, [
-			'images' => $images
+		$form = $this->formFactory->create(PostType::class, $post, [
+			'categories' => $categories
 		]);
 
 		if ($request->isMethod('POST')) {
 			$form->handleRequest($request);
 
 			if ($form->isValid()) {
-				$category = $form->getData();
+				$post = $form->getData();
 
-				$this->save($category);
+				$this->save($post);
 
-				return new RedirectResponse($this->urlGenerator->generate('admin_category'));
+				return new RedirectResponse($this->urlGenerator->generate('admin_post'));
 			}
 		}
 
-		$view = $this->twig->render('admin_category/update.html.twig', [
+		$view = $this->twig->render('admin_post/update.html.twig',  [
 			'form' => $form->createView(),
-			'type' => $category === null ? 'add' : 'edit'
+			'type' => $post === null ? 'add' : 'edit'
 		]);
 
 		$response = new Response();
@@ -112,17 +114,26 @@ class CategoryService
 		return $response;
 	}
 
-	public function save(Category $category)
+	/**
+	 * @param Post $post
+	 * @return RedirectResponse
+	 */
+	public function deleteAction(Post $post)
 	{
-		$this->entityManager->persist($category);
-		$this->entityManager->flush();
-	}
-
-	public function deleteAction(Category $category)
-	{
-		$this->entityManager->remove($category);
+		$this->entityManager->remove($post);
 		$this->entityManager->flush();
 
-		return new RedirectResponse($this->urlGenerator->generate('admin_category'));
+		return new RedirectResponse($this->urlGenerator->generate('admin_post'));
 	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getNewestPosts()
+	{
+		return $this->entityManager
+			->getRepository(Post::class)
+			->getNewestPosts();
+	}
+
 }
