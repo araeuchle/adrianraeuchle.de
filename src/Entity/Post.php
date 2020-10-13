@@ -110,4 +110,9 @@ class Post
 
         return $this;
     }
+
+    public function getShortBody()
+	{
+		return substr($this->body, 0, 200) . '...';
+	}
 }

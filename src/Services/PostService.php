@@ -69,6 +69,12 @@ class PostService
 		$this->paginator = $paginator;
 	}
 
+	public function getAllPosts()
+	{
+		return $this->entityManager
+			->getRepository(Post::class)
+			->findAll();
+	}
 
 	public function getPosts(Request $request)
 	{

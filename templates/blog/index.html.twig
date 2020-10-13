@@ -4,9 +4,16 @@
 <main class=" h-auto mb-auto">
     <section class="relative py-16 bg-gray-300 ">
         <div class="container mx-auto mt-6">
-            <h3 class="text-2xl mt-4">Blog</h3><br />
+            <div class="flex">
+                <div class="w-1/2">
+                    <h3 class="text-2xl mt-4">Blog</h3>
+                </div>
+                <div class="w-1/2 text-right pt-6 mr-8">
+                    <a href="{{ url('rss') }}">RSS Feed abonnieren</a>
+                </div>
+            </div>
 
-            <div class="container mx-auto px-4">
+            <div class="container mx-auto px-4 mt-4">
 
                     {% for post in posts %}
                         {% if loop.first == true or loop.index % 4 == 0 %}
