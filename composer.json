@@ -1,4 +1,6 @@
 {
+    "name": "araeuchle/adrianraeuchle",
+    "description": "personal website",
     "type": "project",
     "license": "proprietary",
     "require": {

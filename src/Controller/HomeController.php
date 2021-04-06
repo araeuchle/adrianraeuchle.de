@@ -15,21 +15,13 @@ class HomeController extends AbstractController
 	private $githubApiService;
 
 	/**
-	 * @var PostService
-	 */
-	private $postService;
-
-	/**
 	 * PublicController constructor.
 	 * @param GithubApiService $githubApiService
-	 * @param PostService $postService
 	 */
 	public function __construct(
-		GithubApiService $githubApiService,
-		PostService $postService
+		GithubApiService $githubApiService
 	) {
 		$this->githubApiService = $githubApiService;
-		$this->postService = $postService;
 	}
 
     /**
@@ -40,8 +32,7 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
         	'projectCount' => $this->githubApiService->getProjectCount(),
 			'followersCount' => $this->githubApiService->getFollowersCount(),
-			'daysCount' => $this->githubApiService->getDaysCount(),
-			'posts' => $this->postService->getNewestPosts()
+			'daysCount' => $this->githubApiService->getDaysCount()
 		]);
     }
 }

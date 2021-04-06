@@ -21,14 +21,22 @@ class GithubApiService
 	{
 		try
 		{
-			$count = count($this->client->api('user')->repositories(self::GITHUB_USERNAME));
+			$repos = $this->client
+				->api('user')
+				->repositories(
+					self::GITHUB_USERNAME,
+					$type = 'owner',
+					$sort = 'full_name',
+					$direction = 'asc',
+					$visibility = 'public'
+				);
 		}
 		catch(\Exception $e)
 		{
 			return 'n/a';
 		}
 
-		return  $count;
+		return count($repos);
 	}
 
 	public function getDaysCount()
