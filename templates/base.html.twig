@@ -9,60 +9,16 @@
         {% endblock %}
         <link rel="shortcut icon" type="image/x-icon" href="/build/images/myAvatar.png">
     </head>
-    <body class="h-screen flex flex-col justify-between bg-gray-300">
-        {% include 'partials/navbar.html.twig' %}
+    <body>
+        {% include 'partials/loader.html.twig' %}
+        {% include 'partials/mobile-header.html.twig' %}
+        {% include 'partials/header.html.twig' %}
+
         {% block body %}{% endblock %}
-        {% include 'partials/footer.html.twig' %}
 
         {% block javascripts %}
+            <script src="{{ asset('/build/js/extra/parallax.min.js') }}"></script>
             {{ encore_entry_script_tags('js/app') }}
         {% endblock %}
-
-        <script>
-            new cookieNoticeJS({
-
-                // Position for the cookie-notifier (default=bottom)
-                'cookieNoticePosition': 'bottom',
-
-                // Shows the "learn more button (default=false)
-                'learnMoreLinkEnabled': true,
-
-                // The href of the learn more link must be applied if (learnMoreLinkEnabled=true)
-                'learnMoreLinkHref': '/data/privacy#cookies',
-
-                // Text for optional learn more button
-                'learnMoreLinkText':{
-                    'en':'learn more'
-                },
-
-                // The message will be shown again in X days
-                'expiresIn': 30,
-
-                // Specify a custom font family and size in pixels
-                'fontFamily': 'inherit',
-                'fontSize': 12,
-
-                // Dismiss button background color
-                'buttonBgColor': '#d35400',
-
-                // Dismiss button text color
-                'buttonTextColor': '#fff',
-
-                // Notice background color
-                'noticeBgColor': '#2B6CB0',
-
-                // Notice text color
-                'noticeTextColor': '#fff',
-
-                // the learnMoreLink color (default='#009fdd')
-                'linkColor': '#fff',
-
-                // The target of the learn more link (default='', or '_blank')
-                'linkTarget': '',
-
-                // Print debug output to the console (default=false)
-                'debug': false
-            });
-        </script>
     </body>
 </html>

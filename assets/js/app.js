@@ -13,3 +13,17 @@
 
 import cookie from 'cookie-notice/dist/cookie.notice.min.js';
 import functions from './functions';
+
+window.$ = window.jQuery = require('jquery');
+require('jquery.easing');
+require('waypoints/src/waypoint');
+require('jquery.counterup');
+require('popper.js');
+require('bootstrap');
+require('isotope-layout');
+require('infinite-scroll');
+require('slick');
+window.WOW = require('wow.js');
+require('./morphext.min');
+require('magnific-popup');
+require('./custom');

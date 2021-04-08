@@ -1,0 +1,46 @@
+{% extends 'base.html.twig'  %}
+
+{% block body %}
+    <main class="content h-auto mb-auto">
+        <section class="relative py-4 bg-gray-300 ">
+            <div class="container mb-4">
+                <h3 class="mt-6 mb-4 text-xl">Skills</h3>
+
+                <div class="rounded bg-white shadow-dark padding-30">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- about text -->
+                            <p>
+                                Hi Ich bin Adrian<br />
+                                Ich bin seit 11 Jahren Web-Entwickler aus Leidenschaft.
+                                In meiner beruflichen Laufbahn und Freizeit habe ich mir mittlerweile einige Fähigkeiten
+                                und Kenntnisse angeeignet, die ich auf der rechten Seite präsentiere.<br />
+                                <br />
+                                Mit der Zeit wird sich diese Liste allerdings noch erweitern, da ich immer wissbegierig
+                                bin und jederzeit gerne neu dazu lerne. Man hat schließlich niemals ausgelernt.
+
+                            </p>
+                            <div class="spacer d-md-none d-lg-none" data-height="30" style="height: 30px;"></div>
+                        </div>
+                        <div class="col-md-6">
+                            {% for skill in skills %}
+                                <div class="skill-item">
+                                    <div class="skill-info clearfix">
+                                        <h4 class="float-left mb-3 mt-0">{{ skill.name }}</h4>
+                                        <span class="float-right">{{ skill.rating }}%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar data-background" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ skill.rating }}" data-color="{{ skill.color }}" style="background-color: {{ skill.color }}; width: {{ skill.rating }}%;">
+                                        </div>
+                                    </div>
+                                    <div class="spacer" data-height="20" style="height: 20px;"></div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock %}

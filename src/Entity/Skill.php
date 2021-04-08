@@ -29,22 +29,39 @@ class Skill
      * @Assert\NotBlank(message="Bitte geben Sie eine Bewertung der Fähigkeit ein.")
      * @Assert\Range(
      *     min=1,
-     *     max=5,
-     *     notInRangeMessage="Bitte geben Sie eine Bewertung zwischen 1 und 5 ein."
+     *     max=100,
+     *     notInRangeMessage="Bitte geben Sie eine Bewertung zwischen 1 und 100 ein."
      * )
      */
     private $rating;
 
+	/**
+	 * @var string
+	 * @ORM\Column(name="color")
+	 * @Assert\NotBlank(message="Bitte geben Sie eine eine Farbe ein.")
+	 */
+    private $color;
+
+	/**
+	 * @return int|null
+	 */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+	/**
+	 * @return string|null
+	 */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+	/**
+	 * @param string $name
+	 * @return $this
+	 */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -52,15 +69,41 @@ class Skill
         return $this;
     }
 
+	/**
+	 * @return int|null
+	 */
     public function getRating(): ?int
     {
         return $this->rating;
     }
 
+	/**
+	 * @param int $rating
+	 * @return $this
+	 */
     public function setRating(int $rating): self
     {
         $this->rating = $rating;
 
         return $this;
     }
+
+	/**
+	 * @return string
+	 */
+	public function getColor(): string
+	{
+		return $this->color;
+	}
+
+	/**
+	 * @param string $color
+	 * @return self
+	 */
+	public function setColor(string $color): self
+	{
+		$this->color = $color;
+
+		return $this;
+	}
 }

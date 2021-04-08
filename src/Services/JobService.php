@@ -50,7 +50,7 @@ class JobService
 	{
 		return $this->entityManager
 			->getRepository(Job::class)
-			->findBy([], ['sorting' => 'ASC']);
+			->findBy([], ['startDate' => 'DESC']);
 	}
 
 	public function save(Job $job)

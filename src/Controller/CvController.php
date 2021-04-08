@@ -18,15 +18,9 @@ class CvController extends AbstractController
 	 */
 	private $jobService;
 
-	/**
-	 * @var SkillService
-	 */
-	private $skillService;
-
-	public function __construct(JobService  $jobService, SkillService $skillService)
+	public function __construct(JobService  $jobService)
 	{
 		$this->jobService = $jobService;
-		$this->skillService = $skillService;
 	}
 
     /**
@@ -35,8 +29,7 @@ class CvController extends AbstractController
     public function index()
     {
 		return $this->render('cv/index.html.twig', [
-			'jobs'  => $this->jobService->getJobs(),
-			'skills' => $this->skillService->getSkills()
+			'jobs'  => $this->jobService->getJobs()
 		]);
     }
 }

@@ -48,22 +48,26 @@ class Job
      */
     private $company;
 
-    /**
-     * @ORM\Column(type="integer")
-	 * @Assert\NotBlank(message="Bitte geben Sie eine Sortierung ein.")
-     */
-    private $sorting;
-
+	/**
+	 * @return int|null
+	 */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+	/**
+	 * @return string|null
+	 */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+	/**
+	 * @param string|null $title
+	 * @return $this
+	 */
     public function setTitle(string $title = null): self
     {
         $this->title = $title;
@@ -71,11 +75,18 @@ class Job
         return $this;
     }
 
+	/**
+	 * @return \DateTimeInterface|null
+	 */
     public function getStartDate(): ?\DateTimeInterface
     {
         return $this->startDate;
     }
 
+	/**
+	 * @param \DateTimeInterface|null $startDate
+	 * @return $this
+	 */
     public function setStartDate(\DateTimeInterface $startDate = null): self
     {
         $this->startDate = $startDate;
@@ -83,11 +94,18 @@ class Job
         return $this;
     }
 
+	/**
+	 * @return \DateTimeInterface|null
+	 */
     public function getEndDate(): ?\DateTimeInterface
     {
         return $this->endDate;
     }
 
+	/**
+	 * @param \DateTimeInterface|null $endDate
+	 * @return $this
+	 */
     public function setEndDate(?\DateTimeInterface $endDate = null): self
     {
         $this->endDate = $endDate;
@@ -95,11 +113,18 @@ class Job
         return $this;
     }
 
+	/**
+	 * @return string|null
+	 */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
+	/**
+	 * @param string|null $description
+	 * @return $this
+	 */
     public function setDescription(string $description = null): self
     {
         $this->description = $description;
@@ -107,11 +132,18 @@ class Job
         return $this;
     }
 
+	/**
+	 * @return string|null
+	 */
     public function getCompany(): ?string
     {
         return $this->company;
     }
 
+	/**
+	 * @param string|null $company
+	 * @return $this
+	 */
     public function setCompany(string $company = null): self
     {
         $this->company = $company;
@@ -119,18 +151,9 @@ class Job
         return $this;
     }
 
-    public function getSorting(): ?int
-    {
-        return $this->sorting;
-    }
-
-    public function setSorting(int $sorting = null): self
-    {
-        $this->sorting = $sorting;
-
-        return $this;
-    }
-
+	/**
+	 * @return string
+	 */
     public function getDifference()
 	{
 		$endDate = $this->endDate;

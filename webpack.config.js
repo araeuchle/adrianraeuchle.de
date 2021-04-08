@@ -11,8 +11,13 @@ Encore
         from: './assets/images',
         to: 'images/[path][name].[ext]'
     })
+    .copyFiles({
+        from: './assets/extraJs',
+        to: 'js/extra/[path][name].[ext]'
+    })
 
-    .addEntry('js/app', './assets/js/app.js') // your js entry file
+
+    .addEntry('js/app', './assets/js/app.js')
     .addStyleEntry('css/app', './assets/css/app.css')
 
     .enableSassLoader()

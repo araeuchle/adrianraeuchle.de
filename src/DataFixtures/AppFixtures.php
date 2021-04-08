@@ -2,69 +2,55 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Category;
 use App\Entity\Job;
-use App\Entity\Project;
 use App\Entity\Skill;
-use Cocur\Slugify\Slugify;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
 	/**
-	 * @var int[]
+	 * @var array
 	 */
 	private $skills = [
-		'PHP' => 5,
-		'Laravel' => 5,
-		'Statamic' => 2,
-		'Symfony' => 4,
-		'Doctrine ORM 2' => 5,
-		'Composer' => 5,
-		'JavaScript' => 4,
-		'TypeScript' => 1,
-		'VueJs' => 3,
-		'ReactJs' => 2,
-		'React-Native' => 2,
-		'SCSS' => 3,
-		'Webpack' => 2,
-		'Git' => 4,
-		'SQL' => 3,
-		'MySQL' => 3,
-		'PostgeSQL' => 2,
-		'MongoDB' => 2
+		'Composer' => 100,
+		'Doctrine ORM 2' => 95,
+		'Eloquent ORM' => 100,
+		'Git' => 90,
+		'JavaScript' => 70,
+		'Laravel' => 100,
+		'MongoDB' => 20,
+		'MySQL' => 80,
+		'PHP' => 100,
+		'PostgreSQL' => 30,
+		'React-Native' => 25,
+		'ReactJS' => 25,
+		'SCSS' => 70,
+		'SQL' => 80,
+		'Statamic' => 80,
+		'Symfony' => 100,
+		'TypeScript' => 10,
+		'VueJs' => 60,
+		'WebPack' => 30
 	];
 
 	/**
 	 * @var array
 	 */
-	private $jobs  = [];
+	private $jobs = [];
 
 	/**
-	 * @var array
+	 * @var UserPasswordEncoderInterface
 	 */
-	private $projects = [];
+	private $passwordEncoder;
 
-    /**
-     * @var string[]
-     */
-	private $categories = [
-	    'Symfony',
-        'PHP',
-        'Code Quality',
-        'Design Patterns',
-        'Frontend',
-        'VueJs',
-        'CSS',
-        'SCSS',
-        'JavaScript',
-        'DevOps'
-    ];
-
-	public function __construct()
+	public function __construct(UserPasswordEncoderInterface $passwordEncoder)
 	{
+		$this->passwordEncoder = $passwordEncoder;
+
 		$this->jobs = [
 			[
 				'title' => 'Symfony Entwickler',
@@ -123,140 +109,41 @@ class AppFixtures extends Fixture
 				'description' => 'Entwicklung von verschiedensten Projekten auf Basis von Zend Framework und C# für die Veranstaltungsbranche.'
 			],
 		];
-
-		$slugify = new Slugify();
-		$slugify->activateRuleSet('german');
-
-		$this->projects = [
-			[
-				'name' => 'Stundenplaner',
-				'slug' => $slugify->slugify('Stundenplaner'),
-				'description' => '
-					Das Projekt wurde entwickelt um die Zeiten der Mitarbeiter des Fortservice Peppler zu erfassen. <br />
-					Hier ging es darum eine möglichst einfache Übersicht zu gestalten, die aber dennoch ansprechend aussieht. 
-					Von der Funktionalität her bietet das Projekt eine Zeiterfassung, Urlaubstag Erfassung, Krankheitstag Erfassung, sowie einen Monats- und Jahresreporting. <br />
-					<br />
-					Das Projekt wurde auf Basis von Laravel 6 umgesetzt. 
-				',
-				'lessonsLearned' => '
-					Wie man einen Kalender in PHP generiert. <br />
-					Den Unterschied zwischen dem gregorianischen und julianischem Kalender. <br />
-					Wie man Daten für ein Reporting effizient kummuliert. 
-				',
-				'githubLink' => 'https://github.com/araeuchle/stundenplaner-laravel'
-			],
-			[
-				'name' => 'Laravel Make Service (Open Source)',
-				'slug' => $slugify->slugify('Laravel Make Service'),
-				'description' => '
-					Ein kleines Package, welches ich für die Laravel Community geschrieben habe. <br />
-					Funktionalität lager ich gerne in einem Service aus, anstelle diese direkt in einem Controller zu schreiben.
-					Da es noch kein Paket gab, welches mir die Möglichkeit geboten hat Services über das Artisan Command Line Tool zu generieren, habe ich hierraus ein eigenes Paket gebaut. 
-				',
-				'lessonsLearned' => '
-					Wie man Open Source Projekte für Laravel baut. <br />
-					Wie man das Artisan Command Line Tool erweitert.
-				',
-				'githubLink' => 'https://github.com/araeuchle/laravel-make-service'
-			],
-			[
-				'name' => 'Laravel SEO Redirect Map (Open Source)',
-				'slug' => $slugify->slugify('Laravel SEO Redirect Map'),
-				'description' => '
-					Nach dem ich mit dem Service Maker ein erstes Paket programmiert habe, wollte ich unbedingt noch ein weiteres entwickeln. <br />
-					In einem anderen Projekt hatten wir die Problematik, dass wir Seiten hatten, wo sich teilweise der Link geändert hat, wenn man den Namen der Seite geändert hat. 
-					Dies hat dazu geführt, dass wir schlagartig unser SEO Ranking verloren haben, welches wir die ganze Zeit für die Seite gesammelt haben. <br />
-					Um dies zu verhindern habe ich ein kleines Paket gebaut, welches auf diese Änderungen reagiert und einen Eintrag in eine Seo Mapping Tabelle erstellt. 
-					Über eine Middleware wird dann geprüft, ob sich die URL geändert hat und ob ein Eintrag in der Mapping Tabelle vorhanden ist. Ist dies der Fall, so wird ein 301 oder ein 307 
-					Redirect auf die neue URL gesendet. Somit konnten wir sicherstellen, das unsere Rankings nicht mehr verloren gehen. 
-				',
-				'lessonsLearned' => '
-					Vertiefung des Wissens über Open Source Projekte. <br />
-					Unterschiede zwischen einem 301 und einem 307 Redirect. 
-				',
-				'githubLink' => 'https://github.com/araeuchle/laravel-seo-redirect-map'
-			],
-			[
-				'name' => 'JSON Data Viewer',
-				'slug' => $slugify->slugify('JSON Data Viewer'),
-				'description' => '
-					Im Zuge der Affiliate Projekte wurde ein Programm benötigt, mit dem sich schnell und einfach eine große Menge an JSON Daten einsichten und bearbeiten lässt. <br />
-					Die Daten, die wir bekommen, sind leider nicht immer in dem Zustand wie sie benötigen. Dadurch ist die Idee des JSON Data Viewers entstanden.  
-					Im Viewer lässt sich ein JSON Array importieren, der dann daraus automatisiert ein Formular geniert. Dieses Formular enthält dann die Daten des aktuellen Eintrags.
-					Ist ein Eintrag unwichtig, kann er einfach gelöscht werden. Alternativ lässt er sich auch bearbeiten. Ist man mit dem Bearbeiten der Daten fertig, so lassen sie sich 
-					in JSON und CSV Format exportieren. <br />
-					<br />
-					Das Projekt wurde mittels Laravel 8, VueJS, VueEx und Bootstrap umgesetzt. 
-				',
-				'lessonsLearned' => '
-					Bauen einer SPA in VueJs.<br />
-					Umgang mit dem VueEx Store. 
-				',
-				'githubLink' => 'https://github.com/araeuchle/json-data-viewer'
-			],
-			[
-				'name' => 'adrianraeuchle.de',
-				'slug' => $slugify->slugify('adrianraeuchle.de'),
-				'description' => '
-					Jeder braucht eine Website. Gut das stimmt natürlich nicht wirklich, aber sie ist doch ganz praktisch um seine eigenen Skills zu showcasen. <br />
-					Daher habe ich mir die Arbeit und habe meine eigene Website auf Basis von Symfony 5 und TailwindCSS aufgebaut und auf ihr mich selbst, meinen Lebenslauf und meine Projekte vorgestellt.<br />
-					Ebenfalls einen eigenen Blog, der über einen RSS Feed abonniert werden kann, habe ich implementiert. 
-				',
-				'lessonsLearned' => '
-					Vertiefung meines Symfony Wissens. <br /> 
-					Wie man I18N Funktionalität in Symfony einbaut.  <br />
-					Wie man einen Blog in einen RSS-Feed umwandelt <br />
-					Wie man TailwindCSS in Symfony einsetzt. 
-				',
-				'githubLink' => 'https://github.com/araeuchle/adrianraeuchle.de'
-			]
-		];
 	}
 
 	public function load(ObjectManager $manager)
     {
     	$faker = Factory::create('de');
 
-    	$counter = 0;
-
-    	foreach ($this->jobs as $jobItem) {
-    		$job = new Job();
-    		$job->setTitle($jobItem['title']);
-    		$job->setCompany($jobItem['company']);
-    		$job->setStartDate($jobItem['startDate']);
-    		$job->setEndDate($jobItem['endDate']);
-    		$job->setDescription($jobItem['description']);
-    		$job->setSorting($counter);
-    		$manager->persist($job);
-
-    		$counter++;
-		}
-
-    	foreach ($this->skills as $skillName => $skillRating) {
+    	foreach ($this->skills as $name => $rating) {
     		$skill = new Skill();
-			$skill->setName($skillName);
-			$skill->setRating($skillRating);
-			$manager->persist($skill);
+    		$skill->setName($name);
+    		$skill->setRating($rating);
+    		$skill->setColor($faker->hexColor);
+
+    		$manager->persist($skill);
 		}
 
-    	foreach ($this->projects as $projectItem) {
-    		$project = new Project();
-    		$project->setName($projectItem['name']);
-    		$project->setSlug($projectItem['slug']);
-    		$project->setDescription($projectItem['description']);
-    		$project->setLessonsLearned($projectItem['lessonsLearned']);
-    		$project->setGithubLink($projectItem['githubLink']);
+    	$manager->flush();
 
-			$manager->persist($project);
+		foreach ($this->jobs as $jobItem) {
+			$job = new Job();
+			$job->setTitle($jobItem['title']);
+			$job->setCompany($jobItem['company']);
+			$job->setStartDate($jobItem['startDate']);
+			$job->setEndDate($jobItem['endDate']);
+			$job->setDescription($jobItem['description']);
+			$manager->persist($job);
 		}
 
-    	foreach ($this->categories as $categoryItem) {
-    	    $category = new Category();
-    	    $category->setName($categoryItem);
+		$manager->flush();
 
-    	    $manager->persist($category);
-        }
+		$user = new User();
+		$user->setName('araeuchle');
+		$user->setRoles(['ROLE_ADMIN']);
+		$user->setPassword($this->passwordEncoder->encodePassword($user, $_ENV['ADMIN_PW']));
 
-        $manager->flush();
+		$manager->persist($user);
+		$manager->flush();
     }
 }

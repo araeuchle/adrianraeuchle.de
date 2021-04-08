@@ -1,45 +1,39 @@
 {% extends 'base.html.twig'  %}
 
 {% block body %}
-    <main class=" h-auto mb-auto">
-        <section class="relative py-16 bg-gray-300 ">
-            <div class="container mx-auto px-4 bg-white p-4 shadow mt-6">
+    <main class="content">
+        <section class="relative py-4 bg-gray-300 ">
+            <div class="container mb-4">
                 <h3 class="text-2xl mt-4">Lebenslauf</h3><br />
 
-                <ul>
+                <!-- responsive spacer -->
+                <div class="spacer d-md-none d-lg-none" data-height="30" style="height: 30px;"></div>
+
+                <!-- timeline wrapper -->
+                <div class="timeline exp bg-white rounded shadow-dark padding-30 overflow-hidden">
+
                     {% for job in jobs %}
-                    <div class="mb-5 pl-3 {% if loop.first %} border-l-2 border-blue-500 {% endif %}">
-                        <strong>{{ job.title }}  @ {{ job.company }}</strong><br />
-                        {{ job.startDate.format('d.m.Y') }} - {% if job.endDate is null %} heute {% else %}{{ job.endDate.format('d.m.Y') }} {% endif %}<br />
-                        <strong>({{ job.getDifference() }})</strong><br />
-                        {{ job.description | nl2br }}
+                    <!-- timeline item -->
+                    <div class="timeline-container wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                        <div class="content">
+                            <span class="time">{{ job.startDate.format('d.m.Y') }} -
+                                {% if job.endDate is null %} heute
+                                {% else %}{{ job.endDate.format('d.m.Y') }}
+                                {% endif %}
+                                <span class="inline-block ml-2">({{ job.getDifference() }})</span>
+                            </span>
+                            <h3 class="title">{{ job.title }} @ {{ job.company }}</h3>
+                            <p> {{ job.description | nl2br }}</p>
+
+                        </div>
                     </div>
                     {% endfor %}
-                </ul>
 
-                <h3 class="mt-6 mb-4 text-xl">Skills</h3>
 
-                {% for skill in skills %}
-                    {% if loop.index % 2 == 1 %}
-                        <div class="lg:flex">
-                    {% endif %}
-                    <div class="lg:w-1/2 w-full bg-white rounded mt-4 mr-4 p-4 pb-8 lg:pb-4 shadow text-left border-blue-500 border">
-                        <strong>{{ skill.name }}</strong><br />
-                        <br />
-                        {% for i in range(1, skill.rating) %}
-                            <div class="rounded-full h-3 w-3 float-left bg-blue-500 mt-2 mr-1"></div>
-                        {% endfor %}
+                    <!-- main line -->
+                    <span class="line"></span>
 
-                        {% if skill.rating < 5 %}
-                            {% for  i in range(1, 5 - skill.rating) %}
-                                <div class="rounded-full h-3 w-3 float-left border border-black mt-2 mr-1"></div>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-                    {% if loop.index % 2 ==  0%}
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                </div>
             </div>
         </section>
     </main>

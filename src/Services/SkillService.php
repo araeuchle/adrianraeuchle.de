@@ -49,7 +49,7 @@ class SkillService
 	{
 		return $this->entityManager
 			->getRepository(Skill::class)
-			->findBy([], ['name' => 'ASC']);
+			->findBy([], ['rating' => 'DESC']);
 	}
 
 	public function save(Skill $skill)
