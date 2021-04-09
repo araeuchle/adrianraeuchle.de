@@ -22,10 +22,11 @@ class Project
      */
     private $name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $slug;
+	/**
+	 * @var string
+	 * @ORM\Column(name="category", type="string")
+	 */
+    private $category;
 
     /**
      * @ORM\Column(type="text")
@@ -69,24 +70,21 @@ class Project
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
+	/**
+	 * @return string
+	 */
+	public function getCategory(): string
+	{
+		return $this->category;
+	}
 
-    /**
-     * @param $slug
-     * @return $this
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
+	/**
+	 * @param string $category
+	 */
+	public function setCategory(string $category): void
+	{
+		$this->category = $category;
+	}
 
     /**
      * @return string|null
@@ -144,4 +142,14 @@ class Project
 
         return $this;
     }
+
+    public function getSmallImagePath()
+	{
+		return sprintf('/build/images/projectImages/%s_small.png', $this->name);
+	}
+
+	public function getBigImagePath()
+	{
+		return sprintf('/build/images/projectImages/%s_big.png', $this->name);
+	}
 }

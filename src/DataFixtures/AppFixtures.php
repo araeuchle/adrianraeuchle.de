@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Job;
+use App\Entity\Project;
 use App\Entity\Skill;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -41,6 +42,39 @@ class AppFixtures extends Fixture
 	 * @var array
 	 */
 	private $jobs = [];
+
+	private $projects = [
+		[
+			'name' => 'JSON Data Viewer',
+			'category' => 'PHP / Laravel / VueJS',
+			'description' => 'Um Daten für Affiliate Seiten aufzubereiten, benötigte ich ein Tool, mit dem sich schnell und einfach eine große Menge an JSON Daten einsehen und bearbeiten lässt.
+Die Daten, die ich bekomme, sind leider nicht immer in dem Zustand, wie sie benötigt werden. Dadurch ist die Idee des JSON Data Viewers entstanden.
+
+Im Viewer lässt sich eine JSON Datei importieren. Der Viewer erkennt automatisch die Menge an Einträgen und generiert pro Eintrag ein entsprechendes Formular mit den Datensätzen. Diese Datensätze können dann bequem mittels VueJS bearbeitet werden. Die Daten lassen sich anschließend wieder in CSV und JSON exportieren.
+
+Das Projekt wurde mittels Laravel 8, VueJS, VueEx und Bootstrap umgesetzt.',
+			'lessonsLearned' => 'Bauen einer SPA in VueJs.<br />
+Umgang mit dem VueEx Store.',
+			'githubLink' => 'https://github.com/araeuchle/json-data-viewer',
+		],
+		[
+			'name' => 'adrianraeuchle.de',
+			'category' => 'PHP / Symfony',
+			'description' => 'In diesem Projekt ging es um den Aufbau meiner eigenen persönlichen Website. Ich wollte eine Webseite mit meinem Lebenslauf, so wie die Möglichkeit meine Projekte zu präsentieren. Umgesetzt habe ich die Seite mit Symfony und TailwindCSS.
+<br />
+<br />
+<strong>Als weitere Features sollen folgen:</strong>
+
+<ul>
+<li>Blog</li>
+<li>RSS-Feed</li>
+<li>eine Video Academy zum Thema PHP Entwicklung</li>
+</ul>',
+			'lessonsLearned' => 'Vertiefung meines Symfony Wissens.<br />
+Wie man TailwindCSS in Symfony einsetzt.',
+			'githubLink' => 'https://github.com/araeuchle/adrianraeuchle.de',
+		]
+	];
 
 	/**
 	 * @var UserPasswordEncoderInterface
@@ -134,6 +168,19 @@ class AppFixtures extends Fixture
 			$job->setEndDate($jobItem['endDate']);
 			$job->setDescription($jobItem['description']);
 			$manager->persist($job);
+		}
+
+		$manager->flush();
+
+		foreach ($this->projects as $projectItem) {
+			$project = new Project();
+			$project->setName($projectItem['name']);
+			$project->setCategory($projectItem['category']);
+			$project->setDescription($projectItem['description']);
+			$project->setLessonsLearned($projectItem['lessonsLearned']);
+			$project->setGithubLink($projectItem['githubLink']);
+
+			$manager->persist($project);
 		}
 
 		$manager->flush();

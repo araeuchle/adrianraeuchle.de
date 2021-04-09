@@ -30,15 +30,4 @@ class ProjectController extends AbstractController
             'projects' => $this->projectService->getProjects(),
         ]);
     }
-
-	/**
-	 * @Route("/projects/{slug}", name="projects.detail")
-	 * @param Project $project
-	 */
-    public function detail(Project $project)
-	{
-		return $this->render('project/detail.html.twig', [
-			'project' => $project
-		]);
-	}
 }
