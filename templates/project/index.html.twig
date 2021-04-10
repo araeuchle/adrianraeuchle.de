@@ -40,12 +40,14 @@
                         <img src="{{ project.getBigImagePath() }}" alt="bigImage" />
                         <h2>Projektbeschreibung</h2>
                         <p>
-                            {{ project.description | raw }}
+                        {{ project.description | raw }}
                         </p>
+
                         <h2>Was habe ich in dem Projekt gelernt?</h2>
                         <p>
-                            {{ project.lessonsLearned | raw }}
+                        {{ project.lessonsLearned | raw }}
                         </p>
+
                         <a href="{{ project.githubLink }}" class="btn btn-default" target="_blank">Auf Github ansehen</a>
                     </div>
                 </div>
