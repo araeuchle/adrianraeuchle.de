@@ -145,11 +145,13 @@ class Project
 
     public function getSmallImagePath()
 	{
-		return sprintf('/build/images/projectImages/%s_small.png', $this->name);
+		$name = str_replace([' '], ['_'], $this->name);
+		return sprintf('/build/images/projectImages/%s_small.png', $name);
 	}
 
 	public function getBigImagePath()
 	{
-		return sprintf('/build/images/projectImages/%s_big.png', $this->name);
+		$name = str_replace([' '], ['_'], $this->name);
+		return sprintf('/build/images/projectImages/%s_big.png', $name);
 	}
 }
