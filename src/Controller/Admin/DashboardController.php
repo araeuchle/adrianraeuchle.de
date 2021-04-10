@@ -33,6 +33,5 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Jobs', 'fa fa-briefcase', Job::class);
         yield MenuItem::linkToCrud('Projekte', 'fa fa-file', Project::class);
         yield MenuItem::linkToCrud('Fähigkeiten', 'fa fa-wrench', Skill::class);
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

@@ -37,10 +37,16 @@ class Skill
 
 	/**
 	 * @var string
-	 * @ORM\Column(name="color")
+	 * @ORM\Column(type="string")
 	 * @Assert\NotBlank(message="Bitte geben Sie eine eine Farbe ein.")
 	 */
     private $color;
+
+	/**
+	 * @var string
+	 * @ORM\Column(type="string")
+	 */
+    private $category;
 
 	/**
 	 * @return int|null
@@ -105,5 +111,21 @@ class Skill
 		$this->color = $color;
 
 		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCategory(): string
+	{
+		return $this->category;
+	}
+
+	/**
+	 * @param string $category
+	 */
+	public function setCategory(string $category): void
+	{
+		$this->category = $category;
 	}
 }

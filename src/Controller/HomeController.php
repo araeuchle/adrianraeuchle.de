@@ -9,30 +9,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-	/**
-	 * @var GithubApiService
-	 */
-	private $githubApiService;
-
-	/**
-	 * PublicController constructor.
-	 * @param GithubApiService $githubApiService
-	 */
-	public function __construct(
-		GithubApiService $githubApiService
-	) {
-		$this->githubApiService = $githubApiService;
-	}
-
     /**
      * @Route("/", name="home")
      */
     public function index()
     {
-        return $this->render('home/index.html.twig', [
-        	'projectCount' => $this->githubApiService->getProjectCount(),
-			'followersCount' => $this->githubApiService->getFollowersCount(),
-			'daysCount' => $this->githubApiService->getDaysCount()
-		]);
+        return $this->render('home/index.html.twig');
     }
 }

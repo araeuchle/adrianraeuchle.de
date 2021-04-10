@@ -17,25 +17,136 @@ class AppFixtures extends Fixture
 	 * @var array
 	 */
 	private $skills = [
-		'Composer' => 100,
-		'Doctrine ORM 2' => 95,
-		'Eloquent ORM' => 100,
-		'Git' => 90,
-		'JavaScript' => 70,
-		'Laravel' => 100,
-		'MongoDB' => 20,
-		'MySQL' => 80,
-		'PHP' => 100,
-		'PostgreSQL' => 30,
-		'React-Native' => 25,
-		'ReactJS' => 25,
-		'SCSS' => 70,
-		'SQL' => 80,
-		'Statamic' => 80,
-		'Symfony' => 100,
-		'TypeScript' => 10,
-		'VueJs' => 60,
-		'WebPack' => 30
+		[
+			'name' => 'Composer',
+			'rating' => 100,
+			'category' => 'Backend'
+		],
+		[
+			'name' => 'Doctrine ORM 2',
+			'rating' => 95,
+			'category' => 'Database'
+		],
+		[
+			'name' => 'Eloquent ORM',
+			'rating' => 100,
+			'category' => 'Database'
+		],
+		[
+			'name' => 'Git',
+			'rating' => 90,
+			'category' => 'Backend'
+		],
+		[
+			'name' => 'JavaScript',
+			'rating' => 70,
+			'category' => 'Frontend'
+		],
+		[
+			'name' => 'Laravel',
+			'rating' => 100,
+			'category' => 'Backend'
+		],
+		[
+			'name' => 'MongoDB',
+			'rating' => 20,
+			'category' => 'Database'
+		],
+		[
+			'name' => 'MySQL',
+			'rating' => 90,
+			'category' => 'Database'
+		],
+		[
+			'name' => 'PHP',
+			'rating' => 100,
+			'category' => 'Backend'
+		],
+		[
+			'name' => 'PostgreSQL',
+			'rating' => 30,
+			'category' => 'Database'
+		],
+		[
+			'name' => 'React-Native',
+			'rating' => 25,
+			'category' => 'Frontend'
+		],
+		[
+			'name' => 'ReactJS',
+			'rating' => 25,
+			'category' => 'Frontend'
+		],
+		[
+			'name' => 'SCSS',
+			'rating' => 70,
+			'category' => 'Frontend'
+		],
+		[
+			'name' => 'SQL',
+			'rating' => 70,
+			'category' => 'Database'
+		],
+		[
+			'name' => 'Statamic CMS',
+			'rating' => 80,
+			'category' => 'Backend'
+		],
+		[
+			'name' => 'Symfony',
+			'rating' => 100,
+			'category' => 'Backend'
+		],
+		[
+			'name' => 'TypeScript',
+			'rating' => 30,
+			'category' => 'Frontend'
+		],
+		[
+			'name' => 'VueJS',
+			'rating' => 60,
+			'category' => 'Frontend'
+		],
+		[
+			'name' => 'WebPack',
+			'rating' => 40,
+			'category' => 'Frontend'
+		],
+		[
+			'name' => 'Vagrant',
+			'rating' => 70,
+			'category' => 'DevOps'
+		],
+		[
+			'name' => 'Docker',
+			'rating' => 20,
+			'category' => 'DevOps'
+		],
+		[
+			'name' => 'BashScripting',
+			'rating' => 30,
+			'category' => 'DevOps'
+		],
+		[
+			'name' => 'Linux',
+			'rating' => 40,
+			'category' => 'DevOps'
+		],
+		[
+			'name' => 'Apache',
+			'rating' => 60,
+			'category' => 'DevOps'
+		],
+		[
+			'name' => 'Nginx',
+			'rating' => 40,
+			'category' => 'DevOps'
+		],
+		[
+			'name' => 'Kubernetes',
+			'rating' => 10,
+			'category' => 'DevOps'
+		]
 	];
 
 	/**
@@ -149,11 +260,12 @@ Wie man TailwindCSS in Symfony einsetzt.',
     {
     	$faker = Factory::create('de');
 
-    	foreach ($this->skills as $name => $rating) {
+    	foreach ($this->skills as $skillItem) {
     		$skill = new Skill();
-    		$skill->setName($name);
-    		$skill->setRating($rating);
+    		$skill->setName($skillItem['name']);
+    		$skill->setRating($skillItem['rating']);
     		$skill->setColor($faker->hexColor);
+    		$skill->setCategory($skillItem['category']);
 
     		$manager->persist($skill);
 		}

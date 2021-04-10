@@ -12,8 +12,6 @@ class DataPrivacyController extends AbstractController
      */
     public function index()
     {
-        return $this->render('data_privacy/index.html.twig', [
-            'controller_name' => 'DataPrivacyController',
-        ]);
+        return $this->render('data_privacy/index.html.twig');
     }
 }

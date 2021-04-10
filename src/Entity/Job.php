@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\JobRepository;
+use Carbon\Carbon;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -156,41 +157,89 @@ class Job
 	 */
     public function getDifference()
 	{
-		$endDate = $this->endDate;
+		$startDate = $this->createStartDate();
+		$endDate = $this->createEndDate();
+		$diff = $startDate->diff($endDate);
+		$years = $this->getYearsFromDiff($diff);
 
-		if ($this->endDate === null) {
-			$endDate = new \DateTime();
-		}
-
-		$diff = $this->startDate->diff($endDate);
 		$months = $diff->m + 1;
-		$years = $diff->y;
-
-		if ($years === 0) {
-			$years = null;
-		}
 
 		if ($months === 12) {
 			$years += 1;
 			$months = null;
 		}
 
-		if ($years === 1) {
-			$yearString = 'Jahr';
-		} else if ($years > 1) {
-			$yearString = 'Jahre';
+		return trim($years . ' '. $this->getYearString($years) . ' ' . $months  . ' '. $this->getMonthString($months));
+	}
+
+	/**
+	 * @return Carbon
+	 */
+	private function createEndDate()
+	{
+		if ($this->endDate === null) {
+			return Carbon::now();
 		} else {
-			$yearString =  '';
+			return Carbon::instance($this->endDate);
+		}
+	}
+
+	/**
+	 * @return Carbon
+	 */
+	private function createStartDate()
+	{
+		return Carbon::instance($this->startDate);
+	}
+
+	/**
+	 * @param $diff
+	 * @return ?int
+	 */
+	private function getYearsFromDiff($diff)
+	{
+		$years = $diff->y;
+
+		if ($years === 0) {
+			$years = null;
 		}
 
-		if ($months === 1) {
-			$monthString = 'Monat';
-		} elseif($months  > 1) {
-			$monthString = 'Monate';
-		} else {
-			$monthString = '';
-		}
+		return $years;
+	}
 
-		return trim($years . ' '. $yearString . ' ' . $months  . ' '. $monthString);
+	/**
+	 * @param $years
+	 * @return string
+	 */
+	private function getYearString($years)
+	{
+		switch($years) {
+			case 1:
+				return 'Jahr';
+			case 0:
+			case null:
+			case '':
+				return '';
+			default:
+				return 'Jahre';
+		}
+	}
+
+	/**
+	 * @param $months
+	 * @return string
+	 */
+	private function getMonthString($months)
+	{
+		switch($months) {
+			case 1:
+				return 'Monat';
+			case 0:
+			case null:
+			case '':
+				return '';
+			default:
+				return 'Monate';
+		}
 	}
 }
