@@ -11,7 +11,6 @@
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 // import $ from 'jquery';
 
-import cookie from 'cookie-notice/dist/cookie.notice.min.js';
 import functions from './functions';
 
 window.$ = window.jQuery = require('jquery');

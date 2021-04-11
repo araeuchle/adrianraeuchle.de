@@ -55,7 +55,32 @@
                 </div>
             </div>
 
+            <div class="scroll-down">
+                <a href="#about" class="mouse-wrapper">
+                    <span>Scroll Down</span>
+                    <span class="mouse">
+						<span class="wheel"></span>
+					</span>
+                </a>
+            </div>
+
         </section>
+
+        <section id="skills">
+           {% include 'skill/index.html.twig' %}
+        </section>
+
+        <!-- section services -->
+        <section id="cv">
+            {% include 'cv/index.html.twig' %}
+        </section>
+
+        <!-- section experience -->
+        <section id="projects">
+            {% include 'project/index.html.twig' %}
+        </section>
+
+        <div class="spacer" data-height="96"></div>
 
 
     </main>

@@ -1,75 +1,70 @@
-{% extends 'base.html.twig'  %}
+<div class="container">
 
-{% block body %}
-    <main class="content h-auto mb-auto">
-        <section class="relative py-4 bg-gray-300 ">
-            <div class="container mb-4">
-                <h3 class="mt-6 mb-4 text-xl">Skills</h3>
+    <!-- section title -->
+    <h2 class="section-title wow fadeInUp">Skills</h2>
 
-                <div class="row mb-4">
-                    <div class="col-sm-12">
-                        <div class="rounded bg-white shadow-dark padding-30">
-                            <p>
-                                Hi Ich bin Adrian<br />
-                                Ich bin seit 11 Jahren Web-Entwickler aus Leidenschaft.
-                                In meiner beruflichen Laufbahn und Freizeit habe ich mir mittlerweile einige Fähigkeiten
-                                und Kenntnisse angeeignet, die ich auf der rechten Seite präsentiere.<br />
-                                <br />
-                                Mit der Zeit wird sich diese Liste allerdings noch erweitern, da ich immer wissbegierig
-                                bin und jederzeit gerne neu dazu lerne. Man hat schließlich niemals ausgelernt.<br />
+    <div class="spacer" data-height="60"></div>
 
-                            </p>
+            <div class="row mb-4">
+                <div class="col-sm-12">
+                    <div class="rounded bg-white shadow-dark padding-30">
+                        <p>
+                            Hi Ich bin Adrian<br />
+                            Ich bin seit 11 Jahren Web-Entwickler aus Leidenschaft.
+                            In meiner beruflichen Laufbahn und Freizeit habe ich mir mittlerweile einige Fähigkeiten
+                            und Kenntnisse angeeignet, die ich auf der rechten Seite präsentiere.<br />
+                            <br />
+                            Mit der Zeit wird sich diese Liste allerdings noch erweitern, da ich immer wissbegierig
+                            bin und jederzeit gerne neu dazu lerne. Man hat schließlich niemals ausgelernt.<br />
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                {% set oldCategory = null %}
+                {% for skill in skills %}
+                {% if oldCategory == null %}
+                <div class="col-sm-12 col-lg-6 mb-4">
+                    <div class="rounded bg-white shadow-dark padding-30">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3>{{ skill.category }}</h3>
+
+
+                                {% set oldCategory = skill.category %}
+                                {% elseif oldCategory != skill.category %}
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    {% set oldCategory = null %}
-                    {% for skill in skills %}
-                    {% if oldCategory == null %}
-                    <div class="col-sm-12 col-lg-6 mb-4">
-                        <div class="rounded bg-white shadow-dark padding-30">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h3>{{ skill.category }}</h3>
 
+                <div class="col-sm-12 col-lg-6 mb-4">
+                    <div class="rounded bg-white shadow-dark padding-30">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3>{{ skill.category }}</h3>
+                                {% set oldCategory = skill.category %}
+                                {% endif %}
 
-                                    {% set oldCategory = skill.category %}
-                                    {% elseif oldCategory != skill.category %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-sm-12 col-lg-6 mb-4">
-                        <div class="rounded bg-white shadow-dark padding-30">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h3>{{ skill.category }}</h3>
-                                    {% set oldCategory = skill.category %}
-                                    {% endif %}
-
-                                    <div class="skill-item">
-                                        <div class="skill-info clearfix">
-                                            <h4 class="float-left mb-3 mt-0">{{ skill.name }}</h4>
-                                            <span class="float-right">{{ skill.rating }}%</span>
-                                        </div>
-                                        <div class="progress">
-                                            <div class="progress-bar data-background" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ skill.rating }}" data-color="{{ skill.color }}" style="background-color: {{ skill.color }}; width: {{ skill.rating }}%;">
-                                            </div>
-                                        </div>
-                                        <div class="spacer" data-height="20" style="height: 20px;"></div>
+                                <div class="skill-item">
+                                    <div class="skill-info clearfix">
+                                        <h4 class="float-left mb-3 mt-0">{{ skill.name }}</h4>
+                                        <span class="float-right">{{ skill.rating }}%</span>
                                     </div>
-                                    {% endfor %}
-
+                                    <div class="progress">
+                                        <div class="progress-bar data-background" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ skill.rating }}" data-color="{{ skill.color }}" style="background-color: {{ skill.color }}; width: {{ skill.rating }}%;">
+                                        </div>
+                                    </div>
+                                    <div class="spacer" data-height="20" style="height: 20px;"></div>
                                 </div>
+                                {% endfor %}
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
-
-{% endblock %}
+        </div>
